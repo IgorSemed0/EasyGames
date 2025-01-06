@@ -11,12 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create("users", function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string("vc_name")->nullable();
+            $table->string("vc_username")->unique()->nullable();
+            $table->string("email")->unique()->nullable();
+            $table->string("vc_gender")->nullable();
+            $table->date("dt_birthday")->nullable();
+            $table->string("password")->nullable();
+            $table->string("vc_hometown")->nullable();
+            $table->string("vc_profile")->nullable();
+            $table->string("vc_role")->default("player");
+            $table->integer("it_mamba_coins")->default(5);
+            $table->timestamp("dt_email_verified_at")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
