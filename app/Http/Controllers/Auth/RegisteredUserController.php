@@ -28,24 +28,32 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
-    }
+     public function store(Request $request): RedirectResponse
+     {
+         $request->validate([
+             'vc_name' => 'required|string|max:255',
+             'vc_username' => 'required|string|max:255|unique:'.User::class,
+             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+             'vc_gender' => 'required|string|in:male,female,other',
+             'dt_birthday' => 'required|date',
+             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+             'vc_hometown' => 'nullable|string|max:255',
+         ]);
+     
+         $user = User::create([
+             'vc_name' => $request->vc_name,
+             'vc_username' => $request->vc_username,
+             'email' => $request->email,
+             'vc_gender' => $request->vc_gender,
+             'dt_birthday' => $request->dt_birthday,
+             'password' => Hash::make($request->password),
+             'vc_hometown' => $request->vc_hometown,
+         ]);
+     
+         event(new Registered($user));
+     
+         Auth::login($user);
+     
+         return redirect(route('dashboard', absolute: false));
+     }
 }

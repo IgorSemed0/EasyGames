@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string("vc_profile")->nullable();
             $table->string("vc_role")->default("player");
             $table->integer("it_mamba_coins")->default(5);
-            $table->timestamp("dt_email_verified_at")->nullable();
+            $table->timestamp("email_verified_at")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

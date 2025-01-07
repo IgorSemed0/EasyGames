@@ -19,8 +19,12 @@ export default function UpdateProfileInformation({
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
-            name: user.name,
+            vc_name: user.vc_name,
+            vc_username: user.vc_username,
             email: user.email,
+            vc_gender: user.vc_gender,
+            dt_birthday: user.dt_birthday,
+            vc_hometown: user.vc_hometown,
         });
 
     const submit: FormEventHandler = (e) => {
@@ -43,24 +47,34 @@ export default function UpdateProfileInformation({
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
+                    <InputLabel htmlFor="vc_name" value="Name" />
                     <TextInput
-                        id="name"
+                        id="vc_name"
                         className="mt-1 block w-full"
-                        value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
+                        value={data.vc_name}
+                        onChange={(e) => setData('vc_name', e.target.value)}
                         required
                         isFocused
                         autoComplete="name"
                     />
+                    <InputError className="mt-2" message={errors.vc_name} />
+                </div>
 
-                    <InputError className="mt-2" message={errors.name} />
+                <div>
+                    <InputLabel htmlFor="vc_username" value="Username" />
+                    <TextInput
+                        id="vc_username"
+                        className="mt-1 block w-full"
+                        value={data.vc_username}
+                        onChange={(e) => setData('vc_username', e.target.value)}
+                        required
+                        autoComplete="username"
+                    />
+                    <InputError className="mt-2" message={errors.vc_username} />
                 </div>
 
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -68,10 +82,50 @@ export default function UpdateProfileInformation({
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
-                        autoComplete="username"
+                        autoComplete="email"
                     />
-
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="vc_gender" value="Gender" />
+                    <select
+                        id="vc_gender"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
+                        value={data.vc_gender}
+                        onChange={(e) => setData('vc_gender', e.target.value)}
+                        required
+                    >
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <InputError className="mt-2" message={errors.vc_gender} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="dt_birthday" value="Birthday" />
+                    <TextInput
+                        id="dt_birthday"
+                        type="date"
+                        className="mt-1 block w-full"
+                        value={data.dt_birthday}
+                        onChange={(e) => setData('dt_birthday', e.target.value)}
+                        required
+                    />
+                    <InputError className="mt-2" message={errors.dt_birthday} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="vc_hometown" value="Hometown" />
+                    <TextInput
+                        id="vc_hometown"
+                        className="mt-1 block w-full"
+                        value={data.vc_hometown}
+                        onChange={(e) => setData('vc_hometown', e.target.value)}
+                    />
+                    <InputError className="mt-2" message={errors.vc_hometown} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
@@ -90,8 +144,7 @@ export default function UpdateProfileInformation({
 
                         {status === 'verification-link-sent' && (
                             <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
-                                A new verification link has been sent to your
-                                email address.
+                                A new verification link has been sent to your email address.
                             </div>
                         )}
                     </div>
