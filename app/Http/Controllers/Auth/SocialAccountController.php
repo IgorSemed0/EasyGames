@@ -79,8 +79,7 @@ class SocialAccountController extends Controller
                     'vc_profile' => $profilePic,
                 ]);
             }
-
-            // Create or update social account
+    
             $socialAccount = SocialAccount::updateOrCreate(
                 [
                     'vc_provider_id' => $providerId,
@@ -90,31 +89,24 @@ class SocialAccountController extends Controller
                     'user_id' => $user->id
                 ]
             );
-
-            // Generate token for authentication
-            // $token = $user->createToken('social-auth-token')->plainTextToken;
-
-            return response()->json([
-                'message' => $isNewUser ? 'User registered successfully' : 'User logged in successfully',
-                'user' => $user,
-                // 'token' => $token,
-                'is_new_user' => $isNewUser
-            ], 200);
-
+    
+            Auth::login($user);
+    
+            session()->regenerate();
+    
+            return redirect()->intended(route('dashboard'));
+    
         } catch (\Exception $e) {
             Log::error("{$provider} Authentication Error: " . $e->getMessage(), [
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString(),
             ]);
-
-            return response()->json([
-                'error' => 'Error authenticating with provider',
-                'message' => $e->getMessage(), 
-            ], 500);
+    
+            return redirect()->route('login')
+                ->with('error', 'Error authenticating with ' . $provider);
         }
     }
-
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
