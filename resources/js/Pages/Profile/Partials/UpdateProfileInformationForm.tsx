@@ -6,6 +6,7 @@ import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
+
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
