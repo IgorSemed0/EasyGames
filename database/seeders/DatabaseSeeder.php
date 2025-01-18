@@ -10,12 +10,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call(RoleSeeder::class);
+        
         // Criar usuário admin
         User::factory()->create([
             'vc_name' => 'Administrator',
             'vc_username' => 'admin',
             'email' => 'percynoronin@gmail.com',
-            'vc_role' => 'admin',
+            'role_id' => 1,
             'it_mamba_coins' => 1000,
             'password' => bcrypt('12345678'),
         ]);

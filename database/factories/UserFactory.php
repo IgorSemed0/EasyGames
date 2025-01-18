@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'vc_hometown' => fake()->city(),
             'vc_profile' => fake()->imageUrl(),
-            'vc_role' => 'player',
+            'role_id' => 5,
             'it_mamba_coins' => 5,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -39,7 +39,7 @@ class UserFactory extends Factory
     public function admin(): static
     {
         return $this->state(fn (array $attributes) => [
-            'vc_role' => 'admin',
+            'role_id' => 1,
             'it_mamba_coins' => 1000,
         ]);
     }
