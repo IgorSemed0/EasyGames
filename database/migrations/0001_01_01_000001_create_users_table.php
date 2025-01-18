@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("password")->nullable();
             $table->string("vc_hometown")->nullable();
             $table->string("vc_profile")->nullable();
-            $table->string("vc_role")->default("player");
+            $table->foreignId('role_id')->constrained()->default(5);
             $table->integer("it_mamba_coins")->default(5);
             $table->timestamp("email_verified_at")->nullable();
             $table->rememberToken();

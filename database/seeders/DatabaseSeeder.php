@@ -8,16 +8,28 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        $this->call(RoleSeeder::class);
+        
+        // Criar usuário admin
         User::factory()->create([
-            'name' => 'Test User',
+            'vc_name' => 'Administrator',
+            'vc_username' => 'admin',
+            'email' => 'percynoronin@gmail.com',
+            'role_id' => 1,
+            'it_mamba_coins' => 1000,
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // Criar usuário de teste
+        User::factory()->create([
+            'vc_name' => 'Test User',
+            'vc_username' => 'testuser',
             'email' => 'test@example.com',
         ]);
+
+        // Criar 10 usuários aleatórios
+        User::factory(10)->create();
     }
 }

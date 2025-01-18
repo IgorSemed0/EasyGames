@@ -6,7 +6,8 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
-
+import { FaFacebookF } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc"
 export default function Login({
     status,
     canResetPassword,
@@ -97,6 +98,24 @@ export default function Login({
                         </Link>
                     )}
 
+                    <div>
+                         <button
+                             type="button"
+                             // onClick={() => handleSocialLogin('google')}
+                             className="flex items-center justify-center py-2 px-10 bg-gray-50 hover:bg-gray-200 focus:ring-gray-500 text-black rounded-2xl"
+                         >
+                             <FcGoogle size={20} /> Login com Google
+                         </button>
+             
+                         <button
+                             type="button"
+                             // onClick={() => handleSocialLogin('facebook')}
+                             className="flex items-center justify-center py-2 px-10 bg-gray-50 hover:bg-gray-200 focus:ring-gray-500 text-black rounded-2xl"
+                         >
+                             <FaFacebookF size={20} className="text-blue-500" /> Login com Facebook
+                         </button>
+                     </div>
+                     
                     <PrimaryButton className="ms-4" disabled={processing}>
                         Log in
                     </PrimaryButton>
