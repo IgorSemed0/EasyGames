@@ -31,7 +31,7 @@ class User extends Authenticatable
          "password",
          "vc_profile",
          "vc_hometown", 
-         "vc_role",
+         "role_id",
          "it_mamba_coins",
      ];
 
@@ -90,5 +90,10 @@ class User extends Authenticatable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+    
+    public function hasRole(string $role): bool
+    {
+        return $this->role?->name === $role;
     }
 }
