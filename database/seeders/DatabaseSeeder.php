@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
         // Criar usuário de teste
         User::factory()->create([
             'vc_name' => 'Test User',
-            'vc_username' => 'testuser',
+            'vc_username' => 'test',
             'email' => 'test@example.com',
         ]);
 
         // Criar 10 usuários aleatórios
-        User::factory(10)->create();
+        // User::factory(10)->create();
     }
 }
