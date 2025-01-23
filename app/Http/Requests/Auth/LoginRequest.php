@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => ['required', 'string'], // Changed from email to login
+            'login' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -45,7 +45,6 @@ class LoginRequest extends FormRequest
             'password' => $this->password,
         ];
 
-        // Check if the login is an email or username
         $loginType = filter_var($this->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'vc_username';
         $credentials[$loginType] = $this->login;
 
