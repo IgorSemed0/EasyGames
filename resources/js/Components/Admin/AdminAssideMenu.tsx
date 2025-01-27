@@ -21,9 +21,8 @@ const menuItems = [
     icon: <HiOutlineShoppingBag className="w-5 h-5" />, 
     link: "/admin/products",
     subItems: [
-      { name: "Categories", link: "/admin/products/categories" },
-      { name: "Stock", link: "/admin/products/stock" },
-      { name: "Sales", link: "/admin/products/sales" },
+      { name: "Manager", link: "/admin/products/Manager" },
+      { name: "Transactions", link: "/admin/products/Transactions" },
     ],
   },
   {
@@ -31,9 +30,7 @@ const menuItems = [
     icon: <HiOutlineUsers className="w-5 h-5" />, 
     link: "/admin/users",
     subItems: [
-      { name: "Admins", link: "/admin/users/admins" },
-      { name: "Customers", link: "/admin/users/customers" },
-      { name: "Vendors", link: "/admin/users/vendors" },
+      { name: "List", link: "/admin/users/admins" },
     ],
   },
   {
@@ -41,9 +38,9 @@ const menuItems = [
     icon: <BsCoin className="w-5 h-5" />,
     link: "/admin/ecoin",
     subItems: [
-      { name: "Transactions", link: "/admin/ecoin/transactions" },
-      { name: "Wallets", link: "/admin/ecoin/wallets" },
-      { name: "Exchanges", link: "/admin/ecoin/exchanges" },
+      { name: "Transactions", link: "/admin/ecoin/Transactions" },
+      { name: "Deposits", link: "/admin/ecoin/Deposits" },
+      { name: "Witdraws", link: "/admin/ecoin/Witdraws" },
     ],
   },
 ];
@@ -85,6 +82,7 @@ export default function AdminAsideMenu() {
                       </li>
                     ))}
                   </ul>
+                  <hr />
                 </>
               ) : (
                 <Link

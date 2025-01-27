@@ -16,7 +16,7 @@ export default function AdminNavBar() {
                         >
                             <HiOutlineMenu className="w-6 h-6" />
                         </button>
-                        <Link href="/dashboard" className="flex ms-2 md:me-24">
+                        <Link href="/" className="flex ms-2 md:me-24">
                             <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                                 DarkMamba
                             </span>
