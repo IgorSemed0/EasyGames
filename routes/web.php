@@ -14,9 +14,6 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -25,16 +22,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'role:admin,monitor,bot'])->group(function() {
-    Route::get('/teste', function() {
-        $role = auth()->user()->role->name;
-        return 'Hello: ' . $role;
-    });
-    
+//User Routes
+Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(function() {
     Route::get('/dashboard', function () {
-        return Inertia::render('Admin/AdminDashboard');
+        return Inertia::render('Dashboard');
     })->name('dashboard');
-
 });
+
+//Admin Routes
+    Route::middleware(['auth', 'role:admin,monitor,bot'])->group(function() {
+        // Route::get('/teste', function() {
+        //     $role = auth()->user()->role->name;
+        //     return 'Hello: ' . $role;
+        // });
+        
+        Route::get('/admin/dashboard', function () {
+            return Inertia::render('Admin/AdminDashboard');
+        })->name('dashboard');
+    });
 
 require __DIR__.'/auth.php';

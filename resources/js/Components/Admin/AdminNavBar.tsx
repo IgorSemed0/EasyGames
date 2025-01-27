@@ -16,7 +16,7 @@ export default function AdminNavBar() {
                         >
                             <HiOutlineMenu className="w-6 h-6" />
                         </button>
-                        <Link href="/admin" className="flex ms-2 md:me-24">
+                        <Link href="/dashboard" className="flex ms-2 md:me-24">
                             <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                                 DarkMamba
                             </span>
@@ -48,7 +48,7 @@ export default function AdminNavBar() {
                                 {dropdownOpen && (
                                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 dark:bg-gray-700">
                                         <Link
-                                            href="/admin/profile"
+                                            href="/profile"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600"
                                         >
                                             Profile
