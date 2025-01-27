@@ -31,14 +31,42 @@ Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(fu
 
 //Admin Routes
     Route::middleware(['auth', 'role:admin,monitor,bot'])->group(function() {
-        // Route::get('/teste', function() {
-        //     $role = auth()->user()->role->name;
-        //     return 'Hello: ' . $role;
-        // });
-        
-        Route::get('/admin/dashboard', function () {
+        Route::prefix('admin')->group(function () {
+                        
+            Route::prefix('users')->group(function () {
+                Route::get('index', ['as' => 'Admin.User.UserIndex', 'uses' => 'App\Http\Controllers\Admin\UserController@index']);
+                Route::post('create', ['as' => 'Admin.User.create', 'uses' => 'App\Http\Controllers\UserController@create']);
+                Route::put('update/{id}', ['as' => 'Admin.User.update', 'uses' => 'App\Http\Controllers\UserController@update']);
+                Route::get('destroy/{id}', ['as' => 'Admin.User.destroy', 'uses' => 'App\Http\Controllers\UserController@destroy']);
+            });
+            
+            Route::prefix('ecoins')->group(function () {
+                Route::get('index', ['as' => 'admin.painel.perguntafrequente.index', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@index']);
+                Route::post('create', ['as' => 'admin.painel.perguntafrequente.create', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@create']);
+                Route::put('update/{id}', ['as' => 'admin.painel.perguntafrequente.update', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@update']);
+                Route::get('destroy/{id}', ['as' => 'admin.painel.perguntafrequente.destroy', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@destroy']);
+            });
+            
+            Route::prefix('championships')->group(function () {
+                Route::get('index', ['as' => 'admin.painel.perguntafrequente.index', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@index']);
+                Route::post('create', ['as' => 'admin.painel.perguntafrequente.create', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@create']);
+                Route::put('update/{id}', ['as' => 'admin.painel.perguntafrequente.update', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@update']);
+                Route::get('destroy/{id}', ['as' => 'admin.painel.perguntafrequente.destroy', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@destroy']);
+            });
+            
+            Route::prefix('store')->group(function () {
+                Route::get('index', ['as' => 'admin.painel.perguntafrequente.index', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@index']);
+                Route::post('create', ['as' => 'admin.painel.perguntafrequente.create', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@create']);
+                Route::put('update/{id}', ['as' => 'admin.painel.perguntafrequente.update', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@update']);
+                Route::get('destroy/{id}', ['as' => 'admin.painel.perguntafrequente.destroy', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@destroy']);
+            });
+
+        Route::get('dashboard', function () {
             return Inertia::render('Admin/AdminDashboard');
         })->name('dashboard');
+        });
+
+       
     });
 
 require __DIR__.'/auth.php';
