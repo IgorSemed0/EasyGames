@@ -9,6 +9,7 @@ import {
   HiOutlineLogout,
 } from "react-icons/hi";
 import { BsCoin } from "react-icons/bs";
+import { GiChampions } from "react-icons/gi";
 
 const menuItems = [
   {
@@ -17,20 +18,11 @@ const menuItems = [
     link: "/admin/dashboard",
   },
   {
-    name: "Products",
-    icon: <HiOutlineShoppingBag className="w-5 h-5" />, 
-    link: "/admin/products",
-    subItems: [
-      { name: "Manager", link: "/admin/products/Manager" },
-      { name: "Transactions", link: "/admin/products/Transactions" },
-    ],
-  },
-  {
     name: "Users",
     icon: <HiOutlineUsers className="w-5 h-5" />, 
     link: "/admin/users",
     subItems: [
-      { name: "List", link: "/admin/users/admins" },
+      { name: "List", link: "/admin/users/index" },
     ],
   },
   {
@@ -38,9 +30,27 @@ const menuItems = [
     icon: <BsCoin className="w-5 h-5" />,
     link: "/admin/ecoin",
     subItems: [
-      { name: "Transactions", link: "/admin/ecoin/Transactions" },
-      { name: "Deposits", link: "/admin/ecoin/Deposits" },
-      { name: "Witdraws", link: "/admin/ecoin/Witdraws" },
+      { name: "Transactions", link: "/admin/ecoin/transactions" },
+      { name: "Deposits", link: "/admin/ecoin/deposits" },
+      { name: "Witdraws", link: "/admin/ecoin/witdraws" },
+    ],
+  },
+  {
+    name: "Championships",
+    icon: <GiChampions className="w-5 h-5" />, 
+    link: "/admin/championships",
+    subItems: [
+      { name: "List", link: "/admin/championships/index" },
+      { name: "Manager", link: "/admin/championships/manager" },
+    ],
+  },
+  {
+    name: "Store",
+    icon: <HiOutlineShoppingBag className="w-5 h-5" />, 
+    link: "/admin/store",
+    subItems: [
+      { name: "Products", link: "/admin/products/products" },
+      { name: "Transactions", link: "/admin/products/transactions" },
     ],
   },
 ];
