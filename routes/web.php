@@ -34,31 +34,31 @@ Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(fu
         Route::prefix('admin')->group(function () {
                         
             Route::prefix('users')->group(function () {
-                Route::get('index', ['as' => 'Admin.User.UserIndex', 'uses' => 'App\Http\Controllers\Admin\UserController@index']);
-                Route::post('create', ['as' => 'Admin.User.create', 'uses' => 'App\Http\Controllers\UserController@create']);
-                Route::put('update/{id}', ['as' => 'Admin.User.update', 'uses' => 'App\Http\Controllers\UserController@update']);
-                Route::get('destroy/{id}', ['as' => 'Admin.User.destroy', 'uses' => 'App\Http\Controllers\UserController@destroy']);
+                Route::get('index', ['as' => 'admin.user.index', 'uses' => 'App\Http\Controllers\Admin\UserController@index']);
+                Route::post('create', ['as' => 'admin.user.create', 'uses' => 'App\Http\Controllers\UserController@create']);
+                Route::put('update/{id}', ['as' => 'admin.user.update', 'uses' => 'App\Http\Controllers\UserController@update']);
+                Route::get('destroy/{id}', ['as' => 'admin.user.destroy', 'uses' => 'App\Http\Controllers\UserController@destroy']);
             });
             
             Route::prefix('ecoins')->group(function () {
-                Route::get('index', ['as' => 'admin.painel.perguntafrequente.index', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@index']);
-                Route::post('create', ['as' => 'admin.painel.perguntafrequente.create', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@create']);
-                Route::put('update/{id}', ['as' => 'admin.painel.perguntafrequente.update', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@update']);
-                Route::get('destroy/{id}', ['as' => 'admin.painel.perguntafrequente.destroy', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@destroy']);
+                Route::get('index', ['as' => 'admin.ecoin.index', 'uses' => 'App\Http\Controllers\Admin\ECoinController@index']);
+                Route::post('create', ['as' => 'admin.ecoin.create', 'uses' => 'App\Http\Controllers\Admin\ECoinController@create']);
+                Route::put('update/{id}', ['as' => 'admin.ecoin.update', 'uses' => 'App\Http\Controllers\Admin\ECoinController@update']);
+                Route::get('destroy/{id}', ['as' => 'admin.ecoin.destroy', 'uses' => 'App\Http\Controllers\Admin\ECoinController@destroy']);
             });
             
             Route::prefix('championships')->group(function () {
-                Route::get('index', ['as' => 'admin.painel.perguntafrequente.index', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@index']);
-                Route::post('create', ['as' => 'admin.painel.perguntafrequente.create', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@create']);
-                Route::put('update/{id}', ['as' => 'admin.painel.perguntafrequente.update', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@update']);
-                Route::get('destroy/{id}', ['as' => 'admin.painel.perguntafrequente.destroy', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@destroy']);
+                Route::get('index', ['as' => 'admin.championships.index', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@index']);
+                Route::post('create', ['as' => 'admin.championships.create', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@create']);
+                Route::put('update/{id}', ['as' => 'admin.championships.update', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@update']);
+                Route::get('destroy/{id}', ['as' => 'admin.championships.destroy', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@destroy']);
             });
             
             Route::prefix('store')->group(function () {
-                Route::get('index', ['as' => 'admin.painel.perguntafrequente.index', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@index']);
-                Route::post('create', ['as' => 'admin.painel.perguntafrequente.create', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@create']);
-                Route::put('update/{id}', ['as' => 'admin.painel.perguntafrequente.update', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@update']);
-                Route::get('destroy/{id}', ['as' => 'admin.painel.perguntafrequente.destroy', 'uses' => 'App\Http\Controllers\admin\publico\PerguntaFrequenteController@destroy']);
+                Route::get('index', ['as' => 'admin.store.index', 'uses' => 'App\Http\Controllers\admin\publico\StoreController@index']);
+                Route::post('create', ['as' => 'admin.store.create', 'uses' => 'App\Http\Controllers\admin\publico\StoreController@create']);
+                Route::put('update/{id}', ['as' => 'admin.store.update', 'uses' => 'App\Http\Controllers\admin\publico\StoreController@update']);
+                Route::get('destroy/{id}', ['as' => 'admin.store.destroy', 'uses' => 'App\Http\Controllers\admin\publico\StoreController@destroy']);
             });
 
         Route::get('dashboard', function () {
