@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AdminLayout from '@/Layouts/Admin/AdminDashboardLayout';
 import { Link } from '@inertiajs/react';
-import DataTable from '@/Components/DataTable';
 import { router } from '@inertiajs/react';
+import DataTable from '@/Components/DataTable';
+import SearchInput from '@/Components/SearchInput';
 
 interface User {
     id: number;
@@ -20,9 +21,26 @@ interface Props {
         data: User[];
         links: any;
     };
+    filters: {
+        search: string;
+    };
 }
 
-export default function Index({ users }: Props) {
+export default function Index({ users, filters }: Props) {
+    const [search, setSearch] = useState(filters.search || '');
+
+    const handleSearch = (value: string) => {
+        setSearch(value);
+        router.get(
+            route('admin.user.index'),
+            { search: value },
+            {
+                preserveState: true,
+                preserveScroll: true,
+            }
+        );
+    };
+    
     const handleDelete = (id: number) => {
         if (confirm('Are you sure you want to delete this user?')) {
             router.delete(route('admin.user.destroy', id));
@@ -87,11 +105,23 @@ export default function Index({ users }: Props) {
                         </Link>
                     </div>
                 </div>
+
+                {/* Add search bar */}
+                <div className="mt-4 max-w-md">
+                    <SearchInput
+                        value={search}
+                        onChange={handleSearch}
+                        placeholder="Search users..."
+                    />
+                </div>
+
                 <div className="mt-8">
                     {users.data.length > 0 ? (
                         <DataTable columns={columns} data={users.data} />
                     ) : (
-                        <p className="text-center text-gray-500 py-4">No users found</p>
+                        <p className="text-center text-gray-500 py-4">
+                            {search ? 'No users found matching your search' : 'No users found'}
+                        </p>
                     )}
                 </div>
             </div>

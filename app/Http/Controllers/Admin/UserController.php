@@ -12,11 +12,24 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('role')->paginate(10);
+        $query = User::with('role');
+        
+        if ($request->search) {
+            $query->where(function($q) use ($request) {
+                $q->where('vc_name', 'LIKE', "%{$request->search}%")
+                  ->orWhere('vc_username', 'LIKE', "%{$request->search}%")
+                  ->orWhere('email', 'LIKE', "%{$request->search}%")
+                  ->orWhere('vc_hometown', 'LIKE', "%{$request->search}%");
+            });
+        }
+        
+        $users = $query->paginate(10)->withQueryString();
+        
         return Inertia::render('Admin/User/Index', [
-            'users' => $users
+            'users' => $users,
+            'filters' => $request->only(['search'])
         ]);
     }
 
