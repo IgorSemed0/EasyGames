@@ -5,66 +5,91 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Inertia\Inertia;
-use Inertia\Response;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $users = User::all();
-        return Inertia::render('Admin/Users/UserDashboard',$users);
-        
+        $users = User::with('role')->paginate(10);
+        return Inertia::render('Admin/User/Index', [
+            'users' => $users
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return Inertia::render('Admin/User/Create', [
+            'roles' => $roles
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'vc_name' => 'required|string|max:255',
+            'vc_username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'vc_gender' => 'required|string|in:male,female,other',
+            'dt_birthday' => 'required|date',
+            'password' => ['required', Rules\Password::defaults()],
+            'role_id' => 'required|exists:roles,id',
+            'it_mamba_coins' => 'required|integer|min:0'
+        ]);
+
+        User::create([
+            'vc_name' => $request->vc_name,
+            'vc_username' => $request->vc_username,
+            'email' => $request->email,
+            'vc_gender' => $request->vc_gender,
+            'dt_birthday' => $request->dt_birthday,
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role_id,
+            'it_mamba_coins' => $request->it_mamba_coins
+        ]);
+
+        return redirect()->route('admin.user.index')->with('success', 'User created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+        
+        return Inertia::render('Admin/User/Edit', [
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'vc_name' => 'required|string|max:255',
+            'vc_username' => 'required|string|max:255|unique:users,vc_username,' . $id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'vc_gender' => 'required|string|in:male,female,other',
+            'dt_birthday' => 'required|date',
+            'role_id' => 'required|exists:roles,id',
+            'it_mamba_coins' => 'required|integer|min:0'
+        ]);
+
+        $user->update($request->all());
+
+        return redirect()->route('admin.user.index')->with('success', 'User updated successfully');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $user = User::findOrFail($id);
+        $user->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('admin.user.index')->with('success', 'User deleted successfully');
     }
 }

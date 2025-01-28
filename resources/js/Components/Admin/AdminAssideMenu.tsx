@@ -19,10 +19,12 @@ const menuItems = [
   },
   {
     name: "Users",
-    icon: <HiOutlineUsers className="w-5 h-5" />, 
+    icon: <HiOutlineUsers className="w-5 h-5" />,
     link: "/admin/users",
     subItems: [
       { name: "List", link: "/admin/users/index" },
+      { name: "Activity Log", link: "/admin/users/activity" },
+      { name: "Ban List", link: "/admin/users/bans" },
     ],
   },
   {

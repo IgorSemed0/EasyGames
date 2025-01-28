@@ -35,9 +35,11 @@ Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(fu
                         
             Route::prefix('users')->group(function () {
                 Route::get('index', ['as' => 'admin.user.index', 'uses' => 'App\Http\Controllers\Admin\UserController@index']);
-                Route::post('create', ['as' => 'admin.user.create', 'uses' => 'App\Http\Controllers\UserController@create']);
-                Route::put('update/{id}', ['as' => 'admin.user.update', 'uses' => 'App\Http\Controllers\UserController@update']);
-                Route::get('destroy/{id}', ['as' => 'admin.user.destroy', 'uses' => 'App\Http\Controllers\UserController@destroy']);
+                Route::get('create', ['as' => 'admin.user.create', 'uses' => 'App\Http\Controllers\Admin\UserController@create']);
+                Route::post('store', ['as' => 'admin.user.store', 'uses' => 'App\Http\Controllers\Admin\UserController@store']);
+                Route::get('edit/{id}', ['as' => 'admin.user.edit', 'uses' => 'App\Http\Controllers\Admin\UserController@edit']);
+                Route::put('update/{id}', ['as' => 'admin.user.update', 'uses' => 'App\Http\Controllers\Admin\UserController@update']);
+                Route::delete('destroy/{id}', ['as' => 'admin.user.destroy', 'uses' => 'App\Http\Controllers\Admin\UserController@destroy']);
             });
             
             Route::prefix('ecoins')->group(function () {
@@ -63,7 +65,7 @@ Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(fu
 
         Route::get('dashboard', function () {
             return Inertia::render('Admin/AdminDashboard');
-        })->name('dashboard');
+        })->name('admin.dashboard');
         });
 
        
