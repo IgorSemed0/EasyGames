@@ -30,11 +30,25 @@ export default function Index({ users }: Props) {
     };
 
     const columns = [
+        { header: 'Id', accessor: 'id' },
         { header: 'Name', accessor: 'vc_name' },
         { header: 'Username', accessor: 'vc_username' },
         { header: 'Email', accessor: 'email' },
+        { header: 'Gender', accessor: 'vc_gender' },
+        { header: 'Hometown', accessor: 'vc_hometown' },
         { header: 'Role', accessor: 'role.name' },
         { header: 'Coins', accessor: 'it_mamba_coins' },
+        { 
+            header: 'Verified',
+            accessor: 'email_verified_at',
+            cell: (row: User) => (
+                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                    row.email_verified_at ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                }`}>
+                    {row.email_verified_at ? 'Yes' : 'No'}
+                </span>
+            )
+        },
         {
             header: 'Actions',
             accessor: 'actions',
@@ -56,7 +70,7 @@ export default function Index({ users }: Props) {
             ),
         },
     ];
-
+    
     return (
         <AdminLayout>
             <div className="px-4 sm:px-6 lg:px-8">

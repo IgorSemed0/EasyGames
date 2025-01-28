@@ -37,10 +37,12 @@ class UserController extends Controller
             'vc_gender' => 'required|string|in:male,female,other',
             'dt_birthday' => 'required|date',
             'password' => ['required', Rules\Password::defaults()],
+            'vc_hometown' => 'nullable|string|max:255',
+            'vc_profile' => 'nullable|string|max:255',
             'role_id' => 'required|exists:roles,id',
-            'it_mamba_coins' => 'required|integer|min:0'
+            'it_mamba_coins' => 'required|integer|min:0',
         ]);
-
+    
         User::create([
             'vc_name' => $request->vc_name,
             'vc_username' => $request->vc_username,
@@ -48,10 +50,12 @@ class UserController extends Controller
             'vc_gender' => $request->vc_gender,
             'dt_birthday' => $request->dt_birthday,
             'password' => Hash::make($request->password),
+            'vc_hometown' => $request->vc_hometown,
+            'vc_profile' => $request->vc_profile,
             'role_id' => $request->role_id,
-            'it_mamba_coins' => $request->it_mamba_coins
+            'it_mamba_coins' => $request->it_mamba_coins,
         ]);
-
+    
         return redirect()->route('admin.user.index')->with('success', 'User created successfully');
     }
 
@@ -69,19 +73,22 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
+    
         $request->validate([
             'vc_name' => 'required|string|max:255',
             'vc_username' => 'required|string|max:255|unique:users,vc_username,' . $id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'vc_gender' => 'required|string|in:male,female,other',
             'dt_birthday' => 'required|date',
+            'vc_hometown' => 'nullable|string|max:255',
+            'vc_profile' => 'nullable|string|max:255',
             'role_id' => 'required|exists:roles,id',
-            'it_mamba_coins' => 'required|integer|min:0'
+            'it_mamba_coins' => 'required|integer|min:0',
+            'email_verified_at' => 'nullable|date',
         ]);
-
+    
         $user->update($request->all());
-
+    
         return redirect()->route('admin.user.index')->with('success', 'User updated successfully');
     }
 

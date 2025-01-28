@@ -8,13 +8,17 @@ import SelectInput from '@/Components/SelectInput';
 
 interface UserFormProps {
     initialData?: {
+        id?: number;
         vc_name?: string;
         vc_username?: string;
         email?: string;
         vc_gender?: string;
         dt_birthday?: string;
+        vc_hometown?: string;
+        vc_profile?: string;
         role_id?: number;
         it_mamba_coins?: number;
+        email_verified_at?: string;
     };
     roles: Array<{ id: number; name: string }>;
     isEditing?: boolean;
@@ -27,10 +31,13 @@ export default function UserForm({ initialData = {}, roles, isEditing = false }:
         email: initialData.email || '',
         vc_gender: initialData.vc_gender || '',
         dt_birthday: initialData.dt_birthday || '',
+        vc_hometown: initialData.vc_hometown || '',
+        vc_profile: initialData.vc_profile || '',
         password: '',
         password_confirmation: '',
         role_id: initialData.role_id || '',
         it_mamba_coins: initialData.it_mamba_coins || 0,
+        email_verified_at: initialData.email_verified_at || null,
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -113,6 +120,8 @@ export default function UserForm({ initialData = {}, roles, isEditing = false }:
                 />
                 <InputError message={errors.dt_birthday} className="mt-2" />
             </div>
+            
+            
 
             {!isEditing && (
                 <>
