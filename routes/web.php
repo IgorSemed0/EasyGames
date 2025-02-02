@@ -63,6 +63,22 @@ Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(fu
                 Route::get('destroy/{id}', ['as' => 'admin.store.destroy', 'uses' => 'App\Http\Controllers\admin\publico\StoreController@destroy']);
             });
 
+            Route::prefix('mambacoin')->group(function () {
+                Route::get('index', ['as' => 'admin.mambacoin.index', 'uses' => 'App\Http\Controllers\Admin\MambaCoinController@index']);
+                
+                // Deposits routes
+                Route::get('deposits', ['as' => 'admin.mambacoin.deposits.index', 'uses' => 'App\Http\Controllers\Admin\DepositController@index']);
+                Route::post('deposits/store', ['as' => 'admin.mambacoin.deposits.store', 'uses' => 'App\Http\Controllers\Admin\DepositController@store']);
+                Route::put('deposits/{id}', ['as' => 'admin.mambacoin.deposits.update', 'uses' => 'App\Http\Controllers\Admin\DepositController@update']);
+                Route::delete('deposits/{id}', ['as' => 'admin.mambacoin.deposits.destroy', 'uses' => 'App\Http\Controllers\Admin\DepositController@destroy']);
+                
+                // Withdrawals routes
+                Route::get('withdrawals', ['as' => 'admin.mambacoin.withdrawals.index', 'uses' => 'App\Http\Controllers\Admin\WithdrawalController@index']);
+                Route::post('withdrawals/store', ['as' => 'admin.mambacoin.withdrawals.store', 'uses' => 'App\Http\Controllers\Admin\WithdrawalController@store']);
+                Route::put('withdrawals/{id}', ['as' => 'admin.mambacoin.withdrawals.update', 'uses' => 'App\Http\Controllers\Admin\WithdrawalController@update']);
+                Route::delete('withdrawals/{id}', ['as' => 'admin.mambacoin.withdrawals.destroy', 'uses' => 'App\Http\Controllers\Admin\WithdrawalController@destroy']);
+            });
+
         Route::get('dashboard', function () {
             return Inertia::render('Admin/AdminDashboard');
         })->name('admin.dashboard');

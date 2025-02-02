@@ -112,4 +112,20 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index')->with('success', 'User deleted successfully');
     }
+    
+    public function createTransaction($type, $amount, $description = null, $metadata = null)
+    {
+        return DB::transaction(function () use ($type, $amount, $description, $metadata) {
+            $transaction = $this->transactions()->create([
+                'transaction_type_id' => $type,
+                'amount' => $amount,
+                'status' => 'pending',
+                'description' => $description,
+                'metadata' => $metadata
+            ]);
+    
+            return $transaction;
+        });
+    }
+    
 }

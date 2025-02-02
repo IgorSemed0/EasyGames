@@ -23,20 +23,19 @@ const menuItems = [
       link: "/admin/users",
       subItems: [
         { name: "List", link: "/admin/users/index" },
-        // { name: "Create User", link: "/admin/users/create" },
         { name: "Activity Log", link: "/admin/users/activity" },
         { name: "Ban List", link: "/admin/users/bans" },
       ],
   },
   {
-    name: "E-Coin",
-    icon: <BsCoin className="w-5 h-5" />,
-    link: "/admin/ecoin",
-    subItems: [
-      { name: "Transactions", link: "/admin/ecoin/transactions" },
-      { name: "Deposits", link: "/admin/ecoin/deposits" },
-      { name: "Witdraws", link: "/admin/ecoin/witdraws" },
-    ],
+      name: "Mamba Coins",
+      icon: <BsCoin className="w-5 h-5" />,
+      link: "/admin/mambacoin",
+      subItems: [
+          { name: "Transactions", link: route('admin.mambacoin.index') },
+          { name: "Deposits", link: route('admin.mambacoin.deposits.index') },
+          { name: "Withdrawals", link: route('admin.mambacoin.withdrawals.index') }
+      ],
   },
   {
     name: "Championships",
@@ -44,7 +43,6 @@ const menuItems = [
     link: "/admin/championships",
     subItems: [
       { name: "List", link: "/admin/championships/index" },
-      { name: "Manager", link: "/admin/championships/manager" },
     ],
   },
   {

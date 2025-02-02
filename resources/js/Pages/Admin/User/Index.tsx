@@ -54,7 +54,7 @@ export default function Index({ users, filters }: Props) {
         { header: 'Email', accessor: 'email' },
         { header: 'Gender', accessor: 'vc_gender' },
         { header: 'Hometown', accessor: 'vc_hometown' },
-        { header: 'Role', accessor: 'role.name' },
+        { header: 'Role', accessor: 'role_id.name' },
         { header: 'Coins', accessor: 'it_mamba_coins' },
         { 
             header: 'Verified',
