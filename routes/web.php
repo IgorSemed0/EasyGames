@@ -77,6 +77,12 @@ Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(fu
                 Route::post('withdrawals/store', ['as' => 'admin.mambacoin.withdrawals.store', 'uses' => 'App\Http\Controllers\Admin\WithdrawalController@store']);
                 Route::put('withdrawals/{id}', ['as' => 'admin.mambacoin.withdrawals.update', 'uses' => 'App\Http\Controllers\Admin\WithdrawalController@update']);
                 Route::delete('withdrawals/{id}', ['as' => 'admin.mambacoin.withdrawals.destroy', 'uses' => 'App\Http\Controllers\Admin\WithdrawalController@destroy']);
+                
+                // Rewards routes (you'll need these later for championship rewards)
+                Route::get('rewards', ['as' => 'admin.mambacoin.rewards.index', 'uses' => 'App\Http\Controllers\Admin\RewardController@index']);
+                Route::post('rewards/store', ['as' => 'admin.mambacoin.rewards.store', 'uses' => 'App\Http\Controllers\Admin\RewardController@store']);
+                Route::put('rewards/{id}', ['as' => 'admin.mambacoin.rewards.update', 'uses' => 'App\Http\Controllers\Admin\RewardController@update']);
+                Route::delete('rewards/{id}', ['as' => 'admin.mambacoin.rewards.destroy', 'uses' => 'App\Http\Controllers\Admin\RewardController@destroy']);
             });
 
         Route::get('dashboard', function () {
