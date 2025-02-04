@@ -34,16 +34,20 @@ const menuItems = [
       subItems: [
           { name: "Transactions", link: route('admin.mambacoin.index') },
           { name: "Deposits", link: route('admin.mambacoin.deposits.index') },
-          { name: "Withdrawals", link: route('admin.mambacoin.withdrawals.index') }
+          { name: "Withdrawals", link: route('admin.mambacoin.withdrawals.index') },
+          { name: "Rewards", link: route('admin.mambacoin.rewards.index') }
       ],
   },
   {
-    name: "Championships",
-    icon: <GiChampions className="w-5 h-5" />, 
-    link: "/admin/championships",
-    subItems: [
-      { name: "List", link: "/admin/championships/index" },
-    ],
+      name: "Championships",
+      icon: <GiChampions className="w-5 h-5" />, 
+      link: "/admin/championships",
+      subItems: [
+          { name: "Games", link: route('admin.games.index') },
+          { name: "Championships", link: route('admin.championships.index') },
+          // { name: "Create Championship", link: route('admin.championships.create') },
+          // { name: "Participants", link: route('admin.championship-participants.index') }
+      ],
   },
   {
     name: "Store",

@@ -51,9 +51,27 @@ Route::middleware(['auth', 'role:player,admin,monitor,bot,moderator'])->group(fu
             
             Route::prefix('championships')->group(function () {
                 Route::get('index', ['as' => 'admin.championships.index', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@index']);
-                Route::post('create', ['as' => 'admin.championships.create', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@create']);
+                Route::get('create', ['as' => 'admin.championships.create', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@create']);
+                Route::post('store', ['as' => 'admin.championships.store', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@store']);
+                Route::get('edit/{id}', ['as' => 'admin.championships.edit', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@edit']);
                 Route::put('update/{id}', ['as' => 'admin.championships.update', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@update']);
-                Route::get('destroy/{id}', ['as' => 'admin.championships.destroy', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@destroy']);
+                Route::delete('destroy/{id}', ['as' => 'admin.championships.destroy', 'uses' => 'App\Http\Controllers\Admin\ChampionshipController@destroy']);
+            });
+            
+            Route::prefix('games')->group(function () {
+                Route::get('index', ['as' => 'admin.games.index', 'uses' => 'App\Http\Controllers\Admin\GameController@index']);
+                Route::get('create', ['as' => 'admin.games.create', 'uses' => 'App\Http\Controllers\Admin\GameController@create']);
+                Route::post('store', ['as' => 'admin.games.store', 'uses' => 'App\Http\Controllers\Admin\GameController@store']);
+                Route::get('edit/{id}', ['as' => 'admin.games.edit', 'uses' => 'App\Http\Controllers\Admin\GameController@edit']);
+                Route::put('update/{id}', ['as' => 'admin.games.update', 'uses' => 'App\Http\Controllers\Admin\GameController@update']);
+                Route::delete('destroy/{id}', ['as' => 'admin.games.destroy', 'uses' => 'App\Http\Controllers\Admin\GameController@destroy']);
+            });
+            
+            Route::prefix('championship-participants')->group(function () {
+                Route::get('index/{championship_id?}', ['as' => 'admin.championship-participants.index', 'uses' => 'App\Http\Controllers\Admin\ChampionshipParticipantController@index']);
+                Route::post('store', ['as' => 'admin.championship-participants.store', 'uses' => 'App\Http\Controllers\Admin\ChampionshipParticipantController@store']);
+                Route::put('update/{id}', ['as' => 'admin.championship-participants.update', 'uses' => 'App\Http\Controllers\Admin\ChampionshipParticipantController@update']);
+                Route::delete('destroy/{id}', ['as' => 'admin.championship-participants.destroy', 'uses' => 'App\Http\Controllers\Admin\ChampionshipParticipantController@destroy']);
             });
             
             Route::prefix('store')->group(function () {
