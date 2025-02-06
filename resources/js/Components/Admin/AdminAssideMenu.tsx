@@ -55,6 +55,7 @@ const menuItems = [
     link: "/admin/store",
     subItems: [
       { name: "Products", link: "/admin/products/products" },
+      { name: "Categories", link: "/admin/products/categories" },
       { name: "Transactions", link: "/admin/products/transactions" },
     ],
   },
